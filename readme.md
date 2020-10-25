@@ -34,4 +34,4 @@ Stage 2: Setting up the control surface script
 
 That's it! You should now be able to use the Pacer as discribed above. 
 
-Please feel free to drop me a DM on twitter if you have any questions @ivanibash
+Please feel free to [drop me a DM](https://twitter.com/ivanibash) if you have any questions.
