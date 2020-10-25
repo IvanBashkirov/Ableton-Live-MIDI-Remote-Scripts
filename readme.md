@@ -1,15 +1,37 @@
-Scripts for creating custom MIDI Remote Scripts for Ableton Live.<br>
-Known to be working on Live 9, untested on Live 10.<br>
-<br>
-<br>
-<a href="https://youtu.be/IgKwcCJsoz4">In-depth video tutorial</a><br>
-For the Push 2, user <a href="https://github.com/jzgdev/Push2UserModeScript">jzgdev</a> has a working Push 2 User Mode.<br>
-<br>
-Downloads:<br>
-<a href="http://mountainutilities.eu/bcmanager">BCRManager</a><br>
-<a href="https://atom.io">Atom</a><br>
-<br>
-Based off FCB1020 scripts at <a href="http://remotescripts.blogspot.com">http://remotescripts.blogspot.com/</a><br>
+This is a Control Surface script for Nektar Pacer that allows tight intergration with Ableton Live (tested with version 9.7 only). The mapping is as follows:
 
-<H4>Disclaimer</H4>
-THESE FILES ARE PROVIDED AS-IS, WITHOUT ANY WARRANTY, EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO FITNESS FOR ANY PARTICULAR PURPOSE.
+| Switch | Function                                   |
+|--------|--------------------------------------------|
+| A      | Enable/disable currently selected track    |
+| B      | Solo currently selected track              |
+| C      | Next scene                                 |
+| D      | Previous scene                             |
+| 1      | Session Record Button                      |
+| 2      | Previous Track                             |
+| 3      | Next Track                                 |
+| 4      | Stop all clips on currently selected track |
+| 5      | Launch a clip at currently selected slot   |
+| 6      | Arm currently selected track               |
+
+
+Setup:
+
+There are two parts of the puzzle of getting Pacer to properly talk with Ableton Live. You need a Pacer preset and Ableton Live script. 
+
+Stage 1: Setting up Pacer
+
+1. Download Pacer Preset file from the repository (The one with .syx extension)
+2. Connect Pacer to your laptop and go to https://studiocode.dev/pacer-editor/#/patch
+3. Ensure Pacer is connected and correct ports are chosen in the "MIDI input" and "MIDI output" dropdowns. (typically should be set to PACER MIDI1)
+4. Click 'Load sysex file' and upload the Pacer Preset file.
+5. Click 'Send to Pacer'. WARNING! This might overwrite your A1 slot. If you want to keep the preset stored there copy it to another slot first.
+
+Stage 2: Setting up the control surface script
+
+1. Download Nektar Pacer folder from the repository
+2. Find your Ableton Live in Applications folder. Right click the app -> Show Package Contents. Navigate to Contents/App-Resources/MIDI Remote Scripts. Drop the Nektar Pacer folder into the MIDI Remote Scripts folder.
+3. Start Ableton Live. Go to Preferences -> Link/MIDI tab. Under Control Surface dropdown you should now see Nektar Pacer option. Choose that. Set Input and Output to PACER (MIDI1). Below enable "Track" and "Remote" options for Nektar_Pacer Input (PACER (MIDI1)). Enable "Sync" and "Remote" for Nektar_Pacer Output (PACER(MIDI1)).
+
+That's it! You should now be able to use the Pacer as discribed above. 
+
+Please feel free to drop me a DM on twitter if you have any questions @ivanibash
