@@ -5,7 +5,7 @@
 # ------------------------
 
 TRACK_OFFSET = -1 #offset from the left of linked session origin; set to -1 for auto-joining of multiple instances
-SCENE_OFFSET = 0 #offset from the top of linked session origin (no auto-join)
+SCENE_OFFSET = -1 #offset from the top of linked session origin (no auto-join)
 
 # Buttons / Pads
 # -------------
@@ -28,7 +28,7 @@ REDO = -1 #Redo
 LOOP = -1 #Loop on/off
 PUNCHIN = -1 #Punch in
 PUNCHOUT = -1 #Punch out
-OVERDUB = -1 #Overdub on/off
+OVERDUB = 4 #Overdub on/off
 METRONOME = -1 #Metronome on/off
 RECQUANT = -1 #Record quantization on/off
 DETAILVIEW = -1 #Detail view switch
@@ -66,12 +66,12 @@ ZOOMLEFT = -1 #Session Zoom left
 ZOOMRIGHT = -1 #Session Zoom right
 
 # Track Navigation
-TRACKLEFT = -1 #Track left
-TRACKRIGHT = -1 #Track right
+TRACKLEFT = 5 #Track left
+TRACKRIGHT = 6 #Track right
 
 # Scene Navigation
-SCENEUP = -1 #Scene down
-SCENEDN = -1 #Scene up
+SCENEUP = 3 #Scene down
+SCENEDN = 2 #Scene up
 
 # Scene Launch
 SELSCENELAUNCH = -1 #Selected scene launch
@@ -86,7 +86,7 @@ SCENELAUNCH = (-1, #Scene 1 Launch
                )
 
 # Clip Launch / Stop
-SELCLIPLAUNCH = -1 #Selected clip launch
+SELCLIPLAUNCH = 8 #Selected clip launch
 STOPALLCLIPS = -1 #Stop all clips
 
 # 8x8 Matrix note assignments
@@ -103,9 +103,10 @@ CLIPNOTEMAP = ((-1, -1, -1, -1, -1, -1, -1, -1), #Row 1
 
 # Track Control
 MASTERSEL = -1 #Master track select
-SELTRACKREC = -1 # Arm Selected Track
-SELTRACKSOLO = -1 # Solo Selected Track
-SELTRACKMUTE = -1 # Mute Selected Track
+SELTRACKREC = 9 # Arm Selected Track
+SELTRACKSOLO = 1 # Solo Selected Track
+SELTRACKMUTE = 0 # Mute Selected Track
+SELTRACKSTOP = 7 # Stop all clips on Selected Track
 
 TRACKSTOP = (-1, #Track 1 Clip Stop
              -1, #Track 2
@@ -116,6 +117,7 @@ TRACKSTOP = (-1, #Track 1 Clip Stop
              -1, #Track 7
              -1, #Track 8
              )
+
 TRACKSEL = (-1, #Track 1 Select
             -1, #Track 2
             -1, #Track 3

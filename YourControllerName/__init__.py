@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import Live
-from YourControllerName import YourControllerName
+from NektarPacer import NektarPacer
 
 def create_instance(c_instance):
     ' Creates and returns the APC20 script '
-    return YourControllerName(c_instance)
+    return NektarPacer(c_instance)
 
 
 # local variables:

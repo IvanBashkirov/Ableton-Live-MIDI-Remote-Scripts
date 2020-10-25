@@ -24,14 +24,14 @@ from MIDI_Map import *
 #MIDI_CC_TYPE = 1
 #MIDI_PB_TYPE = 2
 
-class YourControllerName(ControlSurface):
-    __doc__ = " Script for YourControllerName in APC emulation mode "
+class Nektar_Pacer(ControlSurface):
+    __doc__ = " Script for Nektar_Pacer in APC emulation mode "
 
     _active_instances = []
     def _combine_active_instances():
         track_offset = 0
         scene_offset = 0
-        for instance in YourControllerName._active_instances:
+        for instance in Nektar_Pacer._active_instances:
             instance._activate_combination_mode(track_offset, scene_offset)
             track_offset += instance._session.width()
     _combine_active_instances = staticmethod(_combine_active_instances)
@@ -70,15 +70,15 @@ class YourControllerName(ControlSurface):
 
 
     def _do_combine(self):
-        if self not in YourControllerName._active_instances:
-            YourControllerName._active_instances.append(self)
-            YourControllerName._combine_active_instances()
+        if self not in Nektar_Pacer._active_instances:
+            Nektar_Pacer._active_instances.append(self)
+            Nektar_Pacer._combine_active_instances()
 
 
     def _do_uncombine(self):
-        if ((self in YourControllerName._active_instances) and YourControllerName._active_instances.remove(self)):
+        if ((self in Nektar_Pacer._active_instances) and Nektar_Pacer._active_instances.remove(self)):
             self._session.unlink()
-            YourControllerName._combine_active_instances()
+            Nektar_Pacer._combine_active_instances()
 
 
     def _activate_combination_mode(self, track_offset, scene_offset):
@@ -97,9 +97,6 @@ class YourControllerName(ControlSurface):
         self._session.set_scene_bank_buttons(self._note_map[SESSIONDOWN], self._note_map[SESSIONUP])
         self._session.set_select_buttons(self._note_map[SCENEDN], self._note_map[SCENEUP])
         self._scene_launch_buttons = [self._note_map[SCENELAUNCH[index]] for index in range(8) ]
-        self._track_stop_buttons = [self._note_map[TRACKSTOP[index]] for index in range(8) ]
-        self._session.set_stop_all_clips_button(self._note_map[STOPALLCLIPS])
-        self._session.set_stop_track_clip_buttons(tuple(self._track_stop_buttons))
         self._session.selected_scene().name = 'Selected_Scene'
         self._session.selected_scene().set_launch_button(self._note_map[SELSCENELAUNCH])
         self._session.set_slot_launch_button(self._note_map[SELCLIPLAUNCH])
@@ -133,6 +130,9 @@ class YourControllerName(ControlSurface):
         self._mixer.selected_strip().set_arm_button(self._note_map[SELTRACKREC])
         self._mixer.selected_strip().set_solo_button(self._note_map[SELTRACKSOLO])
         self._mixer.selected_strip().set_mute_button(self._note_map[SELTRACKMUTE])
+        self._track_stop_buttons = [self._note_map[-1] for index in range(8) ]
+        self._track_stop_buttons[0] = self._note_map[SELTRACKSTOP]
+        self._session.set_stop_track_clip_buttons(tuple(self._track_stop_buttons))
         for track in range(8):
             strip = self._mixer.channel_strip(track)
             strip.name = 'Channel_Strip_' + str(track)
@@ -192,12 +192,24 @@ class YourControllerName(ControlSurface):
     def _on_selected_track_changed(self):
         ControlSurface._on_selected_track_changed(self)
         track = self.song().view.selected_track
+        visible_tracks = list(self.song().visible_tracks)
+        master_track = self.song().master_track
+        track_index = list(self.song().visible_tracks).index(track) if track in visible_tracks else None
         device_to_select = track.view.selected_device
         if device_to_select == None and len(track.devices) > 0:
             device_to_select = track.devices[0]
         if device_to_select != None:
             self.song().view.select_device(device_to_select)
         self._device_component.set_device(device_to_select)
+        self._track_stop_buttons = [self._note_map[-1] for index in range(8) ]
+        if track in visible_tracks:
+            self._session.set_stop_all_clips_button(self._note_map[-1])
+            self._track_stop_buttons[track_index] = self._note_map[SELTRACKSTOP]
+        elif track == master_track:
+            self._session.set_stop_all_clips_button(self._note_map[SELTRACKSTOP])
+        else:
+            self._session.set_stop_all_clips_button(self._note_map[-1])
+        self._session.set_stop_track_clip_buttons(tuple(self._track_stop_buttons))
 
 
     def _load_pad_translations(self):
