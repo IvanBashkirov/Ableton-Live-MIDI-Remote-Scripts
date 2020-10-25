@@ -29,7 +29,7 @@ Stage 1: Setting up Pacer
 Stage 2: Setting up the control surface script
 
 1. Download Nektar Pacer folder from the repository
-2. Find your Ableton Live in Applications folder. Right click the app -> Show Package Contents. Navigate to Contents/App-Resources/MIDI Remote Scripts. Drop the Nektar Pacer folder into the MIDI Remote Scripts folder.
+2. Find your Ableton Live app in Applications folder. Right-click the app -> Show Package Contents. Navigate to Contents/App-Resources/MIDI Remote Scripts. Drop the Nektar Pacer folder into the MIDI Remote Scripts folder.
 3. Start Ableton Live. Go to Preferences -> Link/MIDI tab. Under Control Surface dropdown you should now see Nektar Pacer option. Choose that. Set Input and Output to PACER (MIDI1). Below enable "Track" and "Remote" options for Nektar_Pacer Input (PACER (MIDI1)). Enable "Sync" and "Remote" for Nektar_Pacer Output (PACER(MIDI1)).
 
 That's it! You should now be able to use the Pacer as discribed above. 
